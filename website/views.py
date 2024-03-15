@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from io import BytesIO
 import base64
+from datetime import datetime
+import dateutil.parser
 
 
 
@@ -90,3 +92,29 @@ def graph():
     graph_url = base64.b64encode(img.getvalue()).decode()       # Convert the PNG image to base64 string
 
     return render_template('graph.html', graph_url=graph_url)       # Render the HTML template with the graph
+    
+@my_view.route("/graph2")
+def graph2():
+    dates = []
+    tasks_count = []
+
+    entries = Todo.query.all()
+    for entry in entries:
+        # Convert entry.date_created to a datetime object
+        date_created = dateutil.parser.parse(entry.date_created)
+        dates.append(date_created.strftime('%Y-%m-%d'))
+        tasks_count = Todo.query.filter_by(complete=True).count()
+
+    plt.figure(figsize=(8, 6))
+    plt.bar(dates, tasks_count)
+    plt.title('Completed Tasks by Date')
+    plt.xlabel('Date')
+    plt.ylabel('Number of Tasks Completed')
+
+    img = BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+    plt.close()
+
+    date_graph_url = base64.b64encode(img.getvalue()).decode()
+    return render_template('graph2.html', date_graph_url=date_graph_url)
