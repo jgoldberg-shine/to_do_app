@@ -1,8 +1,15 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, send_file
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 from .models import Todo
 from . import db
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import pandas as pd
+from io import BytesIO
+import base64
+
 
 
 
@@ -62,4 +69,24 @@ def page2():
     data = Todo.query.all()
     return render_template("page2.html", data = data)
 
+@my_view.route("/graph")
+def graph():
+    
+    completed_count = Todo.query.filter_by(complete=True).count()   # Query the database to get counts of completed and not completed tasks
+    not_completed_count = Todo.query.filter_by(complete=False).count()
+    
+    plt.figure(figsize=(8, 6))  # Plotting the graph
+    plt.bar(['Completed', 'Not Completed'], [completed_count, not_completed_count], color=['green', 'red'])
+    plt.title('Tasks Completion Status')
+    plt.xlabel('Status')
+    plt.ylabel('Number of Tasks')
+    plt.show()
+    
+    img = BytesIO() # Save the plot as a PNG image in memory
+    plt.savefig(img, format='png')
+    img.seek(0)
+    plt.close()
 
+    graph_url = base64.b64encode(img.getvalue()).decode()       # Convert the PNG image to base64 string
+
+    return render_template('graph.html', graph_url=graph_url)       # Render the HTML template with the graph
