@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+<p style="background-image: url('calendar.jpg');"> 
+
+{% block content %}
+    <div class="container">
+        <h1>To Do List</h1>
+
+        {% if message %}
+        <p style="color: red;">{{ message }}</p>
+        {% endif %}
+        {% if success %}
+        <p style="color: green;">{{ success }}</p>
+        {% endif %}
+
+        <form action="/add" method="post">
+            <label for="task">Task:</label>
+            <input type="text" id="task" name="task" placeholder="Enter a Task">
+            <label for="priority">Priority:</label>
+            <select id="priority" name="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            </select>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+            <option value="general">General</option>
+            <option value="work">Work</option>
+            <option value="home">Home</option>
+            </select>
+        
+        <button type="submit">Add Task</button>
+        </form>
+
+        <hr>
+        
+
+    
+    {% for todo in todo_list %}
+        <div class="todo-item">
+            <p>Task {{ todo.id }}: {{ todo.task }} - {{ todo.date_created }} - Priority: {{ todo.priority }} - Category: {{ todo.category }} - Status: {% if todo.complete %}completed{% else %}incomplete{% endif %}</p>
+            <div class="todo-buttons">
+                {% if todo.complete == False %}
+                    <a href="/update/{{ todo.id }}">Mark as complete</a>
+                {% elif todo.complete == True %}
+                    <a href="/update/{{ todo.id }}">Mark as incomplete</a>
+                {% endif %}
+                <a href="/delete/{{ todo.id }}">Delete</a>
+                <form action="/edit/{{ todo.id }}" method="POST" style="display: inline;">
+                    <label for="edit-task">Edit:</label>
+                    <input type="text" id="edit-task" name="edit_task" placeholder="Edit your task">
+                    <button type="submit">Save</button>
+                </form>
+                <a href="/priority/{{ todo.id }}"></a>
+                
+            
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

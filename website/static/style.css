@@ -1,0 +1,115 @@
+/* all CSS done with help of AI */
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #5aaeb53e;
+    color: #333;
+}
+
+.container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff; /* White background */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: calc(100% - 85px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff; /* White background */
+}
+
+button[type="submit"] {
+    padding: 8px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.todo-item {
+    margin-bottom: 10px;
+    background-color: #fff; /* White background */
+}
+
+.todo-buttons a {
+    margin-right: 10px;
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.data {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff; /* White background */
+}
+
+.data p {
+    margin: 5px 0;
+}
+
+.data b {
+    color: #333;
+}
+
+.name {
+    font-weight: bold;
+}
+
+nav {
+    background-color: #007bff; /* Background color for the navigation bar */
+    padding: 10px; /* Add some padding around the links */
+    text-align: center; /* Center-align the links horizontally */
+}
+
+nav a {
+    color: #fff; /* Text color for the links */
+    text-decoration: none; /* Remove underline from links */
+    margin: 0 10px; /* Add some spacing between the links */
+}
+
+nav a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}

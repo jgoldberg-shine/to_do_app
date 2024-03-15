@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+
+    <div class="content">
+        {% for data in data %}
+            <div class="data">
+                <p><b>#{{ data.id }}</b></p>
+                <p class="name">{{ data.task }}</p>
+                <p>Created: {{ data.date_created }}</p>
+                <p>Priority: {{ data.priority }}</p>
+                <p>Category: {{ data.category }}</p>
+                {% if data.complete %}
+                    <p>Status: Completed</p>
+                {% else %}
+                    <p>Status: Incomplete</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+
+        <button onclick="printPage()" style="font-size: 16px; padding: 10px 20px;">Print</button>
+
+        <script>
+            function printPage() {
+                window.print();
+            }
+        </script>
+    </div>
+{% endblock %}
